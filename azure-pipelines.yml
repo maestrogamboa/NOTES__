@@ -8,10 +8,6 @@ trigger:
 
 pool:
   name: Default
-strategy:
-  matrix:
-    Python310:
-      python.version: '3.10.7'
 
 steps:
 - task: UsePythonVersion@0
