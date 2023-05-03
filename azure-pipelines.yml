@@ -1,0 +1,50 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  name: Default
+
+steps:
+
+- script: |
+    python -m pip install --upgrade pip
+    pip install -r requirements.txt
+  displayName: 'Install dependencies'
+
+- script: |
+    pip install pytest pytest-azurepipelines
+    pip install pytest-cov
+    python -m pytest test/functional --doctest-modules --junitxml=junit/test-results.xml --cov=. --cov-report=xml --cov-report=html
+  displayName: 'pytest'
+
+
+- task: Docker@0
+  displayName: 'Build an image'
+  inputs:
+    azureSubscription: 'ServiceConenction-notes'
+    dockerFile: Dockerfile
+    imageName: unitednotes2023/united.notes
+
+
+- task: Docker@0
+  displayName: 'Push an image'
+  inputs:
+    azureSubscription: 'ServiceConenction-notes'
+    action: 'Push an image'
+    imageName: unitednotes2023/united.notes
+
+
+- task: AzureRmWebAppDeployment@4
+  displayName: 'Azure App Service Deploy: unitednotes'
+  inputs:
+    azureSubscription: 'ServiceConenction-notes'
+    appType: webAppContainer
+    WebAppName: unitednotes
+    DockerNamespace: unitednotes2023
+    DockerRepository: united.notes
+    DockerImageTag: latest
