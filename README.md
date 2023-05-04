@@ -1,14 +1,14 @@
 ## Notes taking web app with authorization and authentication.
 
 # Setup
-2. Install Dependencies by running:
+** Install Dependencies by running:**
 * python -m pip install -r requirements.txt
 
 # Run
-3. Run application by running:
+** Run application by running: **
 * python main.py
 
 ## Azure DevOps Repo
 https://dev.azure.com/UnitedNotes/Unites.Notes
-* Pipelines 
+** Pipelines ** 
 https://dev.azure.com/UnitedNotes/Unites.Notes/_build
