@@ -1,7 +1,7 @@
-## Notes saving web app with authorization and authentication.
+## Notes taking web app with authorization and authentication.
 
 # Setup
-2. Install Dependecies by running:
+2. Install Dependencies by running:
 * python -m pip install -r requirements.txt
 
 # Run
